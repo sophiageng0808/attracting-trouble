@@ -154,20 +154,14 @@ function FailureRatesTable() {
 
 const adjointSamplingPanels = [
   {
-    title: "True LJ energy",
-    src: "/gifs/true_lj_guided.gif",
-    alt: "Adjoint sampling under the true Lennard-Jones energy",
-    color: accent.tealDark,
-  },
-  {
     title: "Vanilla MACE energy",
-    src: "/gifs/vanilla_mace.gif",
+    src: "/gifs/adjoint_generation_vanilla_evolve.gif",
     alt: "Adjoint sampling under vanilla MACE energy showing collapse failure",
     color: accent.coral,
   },
   {
     title: "1/r^12-augmented MACE",
-    src: "/gifs/r12_mace.gif",
+    src: "/gifs/adjoint_generation_r12_evolve.gif",
     alt: "Adjoint sampling under 1/r^12-augmented MACE energy",
     color: accent.gold,
   },
@@ -176,7 +170,7 @@ const adjointSamplingPanels = [
 function AdjointSamplingComparison() {
   return (
     <div className="space-y-2">
-      <div className="grid gap-x-4 md:grid-cols-3">
+      <div className="grid gap-x-4 md:grid-cols-2">
         {adjointSamplingPanels.map((panel) => (
           <div
             key={`${panel.title}-label`}
@@ -187,13 +181,13 @@ function AdjointSamplingComparison() {
           </div>
         ))}
       </div>
-      <div className="grid gap-x-4 md:grid-cols-3">
+      <div className="grid gap-x-4 md:grid-cols-2">
         {adjointSamplingPanels.map((panel) => (
           <img
             key={`${panel.title}-gif`}
             src={panel.src}
             alt={panel.alt}
-            className="block aspect-square w-full"
+            className="block h-auto w-full object-contain"
           />
         ))}
       </div>
@@ -353,7 +347,7 @@ export default function MLIPProjectPage() {
 
           <div className="mt-8">
             <FigureBlock
-              caption="Adjoint sampling under analytic and learned energy landscapes."
+              caption="Adjoint sampling under learned MACE energy landscapes."
             >
               <AdjointSamplingComparison />
             </FigureBlock>
