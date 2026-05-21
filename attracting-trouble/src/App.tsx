@@ -319,13 +319,13 @@ export default function MLIPProjectPage() {
               <div className="flex justify-center">
                 <div className="grid w-fit max-w-full grid-cols-1 items-start gap-4 sm:grid-cols-2 sm:gap-6">
                   <img
-                    src="/gifs/xyz_animate_trajectory.gif"
-                    alt="3D molecular trajectory animation"
+                    src="/gifs/proper_xyz_animate_trajectory.gif"
+                    alt="Animated 3D molecular trajectory"
                     className="mx-auto block h-[min(60vw,320px)] w-auto max-w-full object-contain sm:h-[360px]"
                   />
                   <img
-                    src="/gifs/compression_probe_white_bg.gif"
-                    alt="Short-range compression energy and force response for vanilla MACE and 1/r^12-augmented MACE"
+                    src="/gifs/final_compression_probe_two_model.gif"
+                    alt="Animated energy and radial force dissociation scans for vanilla MACE and 1/r^12-augmented MACE"
                     className="mx-auto block h-[min(60vw,320px)] w-auto max-w-full object-contain sm:h-[360px]"
                   />
                 </div>
