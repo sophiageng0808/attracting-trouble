@@ -248,7 +248,12 @@ export default function MLIPProjectPage() {
               <h1 className="mx-auto mt-4 max-w-4xl font-serif text-5xl font-semibold tracking-tight text-slate-900 md:text-6xl">
                 Attracting Trouble?
               </h1>
-              <div className="mt-6 text-base text-slate-700"> </div>
+              <p className="mx-auto mt-5 max-w-3xl text-xl leading-8 text-slate-700 md:text-2xl">
+                How generative modelling fails with MLIPs
+              </p>
+              <div className="mt-6 text-base text-slate-700">
+                Sophia Geng, Andreas Burger, Varinia Bernales, Alán Aspuru-Guzik
+              </div>
               <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-slate-600">
                 We study how short-range errors in learned interatomic potentials become amplified during generative sampling. Using the Lennard-Jones 13-atom cluster (LJ13) as a controlled test system, we show that a 1/r^12-augmented MACE model produces more physically realistic adjoint samples than vanilla MACE, improving pair-distance recovery and reducing unphysical high-energy failures.
               </p>
@@ -369,48 +374,27 @@ export default function MLIPProjectPage() {
             <p>
               More broadly, these results show that MLIP evaluation should include targeted short-range repulsion diagnostics, since standard energy and force metrics may not reveal failures in compressed regions of configuration space that become apparent only when a learned potential is used as a generative energy landscape. Repulsion diagnostics on MACE-OMol and FairChem models further suggest that close-range reliability is a general evaluation concern for learned interatomic potentials.
             </p>
+            <p>
+              Questions, comments, or ideas building on this work? Please reach out at sophia.geng (at) mail.utoronto.ca or me (at) andreas-burger.com.
+            </p>
           </div>
         </Section>
       </main>
 
-      <footer className="border-t border-slate-200 bg-white/80">
+      <footer className="border-t border-slate-200 bg-slate-50">
         <div className="mx-auto max-w-5xl px-6 py-10">
-          <div className="mx-auto max-w-3xl text-sm leading-7 text-slate-500">
-            <p>
-              This page was built using the{" "}
-              <a
-                href="https://github.com/eliahuhorwitz/Academic-project-page-template"
-                target="_blank"
-                rel="noreferrer"
-                className="underline decoration-slate-300 underline-offset-4 hover:text-slate-900"
-                style={{ color: accent.teal }}
-              >
-                Academic Project Page Template
-              </a>{" "}
-              which was adopted from the{" "}
-              <a
-                href="https://nerfies.github.io"
-                target="_blank"
-                rel="noreferrer"
-                className="underline decoration-slate-300 underline-offset-4 hover:text-slate-900"
-                style={{ color: accent.teal }}
-              >
-                Nerfies
-              </a>{" "}
-              project page. You are free to borrow the source code of this website; we just ask that you link back to the template in the footer.
-              <br />
-              This website is licensed under a{" "}
-              <a
-                href="http://creativecommons.org/licenses/by-sa/4.0/"
-                target="_blank"
-                rel="noreferrer"
-                className="underline decoration-slate-300 underline-offset-4 hover:text-slate-900"
-                style={{ color: accent.teal }}
-              >
-                Creative Commons Attribution-ShareAlike 4.0 International License
-              </a>
-              .
+          <div className="mx-auto max-w-3xl">
+            <p className="text-sm leading-7 text-slate-600">
+              If you found this helpful for your own research, please cite:
             </p>
+            <pre className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white p-5 text-left text-xs leading-6 text-slate-700">
+{`@misc{geng2026attractingtrouble,
+  title = {Attracting Trouble? How Generative Modelling Fails with MLIPs},
+  author = {Geng, Sophia and Burger, Andreas and Bernales, Varinia and Aspuru-Guzik, Alán},
+  year = {2026},
+  url = {https://sophiageng0808.github.io/attracting-trouble/}
+}`}
+            </pre>
           </div>
         </div>
       </footer>
