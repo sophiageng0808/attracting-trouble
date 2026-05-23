@@ -9,7 +9,7 @@ type SectionProps = {
 
 type FigureBlockProps = {
   title?: string;
-  caption: string;
+  caption: React.ReactNode;
   note?: string;
   children?: React.ReactNode;
 };
@@ -120,6 +120,15 @@ function EquationBlock({ children }: { children: React.ReactNode }) {
   );
 }
 
+function R12Term() {
+  return (
+    <span className="whitespace-nowrap">
+      1/<span className="italic">r</span>
+      <sup>12</sup>
+    </span>
+  );
+}
+
 function FailureRatesTable() {
   return (
     <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-[0_10px_24px_rgba(15,23,42,0.05)]">
@@ -154,13 +163,17 @@ function FailureRatesTable() {
 
 const adjointSamplingPanels = [
   {
-    title: "Vanilla MACE energy",
+    title: "Vanilla MACE",
     src: "/gifs/adjoint_generation_vanilla_evolve.gif",
-    alt: "Adjoint sampling under vanilla MACE energy showing collapse failure",
+    alt: "Adjoint sampling under vanilla MACE energy collapsing",
     color: accent.coral,
   },
   {
-    title: "1/r^12-augmented MACE",
+    title: (
+      <>
+        <R12Term />-augmented MACE
+      </>
+    ),
     src: "/gifs/adjoint_generation_r12_evolve.gif",
     alt: "Adjoint sampling under 1/r^12-augmented MACE energy",
     color: accent.gold,
@@ -173,7 +186,7 @@ function AdjointSamplingComparison() {
       <div className="grid gap-x-4 md:grid-cols-2">
         {adjointSamplingPanels.map((panel) => (
           <div
-            key={`${panel.title}-label`}
+            key={`${panel.src}-label`}
             className="min-h-[2.75rem] text-xs font-semibold uppercase tracking-[0.15em]"
             style={{ color: panel.color }}
           >
@@ -255,7 +268,7 @@ export default function MLIPProjectPage() {
                 Sophia Geng, Andreas Burger, Varinia Bernales, Alán Aspuru-Guzik
               </div>
               <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-slate-600">
-                We study how short-range errors in learned interatomic potentials become amplified during generative sampling. Using the Lennard-Jones 13-atom cluster (LJ13) as a controlled test system, we show that a 1/r^12-augmented MACE model produces more physically realistic adjoint samples than vanilla MACE, improving pair-distance recovery and reducing unphysical high-energy failures.
+                We study how short-range errors in learned interatomic potentials become amplified during generative sampling. Using the Lennard-Jones 13-atom cluster (LJ13) as a controlled test system, we show that a <R12Term />-augmented MACE model produces more physically realistic adjoint samples than vanilla MACE, improving pair-distance recovery and reducing unphysical high-energy failures.
               </p>
             </div>
           </div>
@@ -264,13 +277,13 @@ export default function MLIPProjectPage() {
         <Section id="abstract" title="Abstract" light={true}>
           <div className="space-y-4 text-[15px] leading-7 text-slate-600">
             <p>
-              MLIPs offer a computationally efficient alternative to first-principles energy and force calculations, enabling faster molecular simulation and generative modeling. Yet strong equilibrium accuracy does not guarantee physically reliable behavior across the full configuration space. In particular, short-range compressed geometries can expose failures that are not captured by standard energy and force error metrics.
+              MLIPs offer a computationally efficient alternative to expensive quantum chemistry energy and force calculations, enabling faster molecular simulation and generative modeling. Yet high accuracy on equilibrium structures does not guarantee physically reliable behavior across the full configuration space. In particular, short-range compressed geometries can expose failures that are not captured by standard energy and force error metrics.
             </p>
             <p>
               This limitation becomes especially important when the learned potential is used for generative sampling. As atoms approach one another, the energy should increase sharply and the forces should repel the atoms apart. If this repulsive response is underestimated, a sampler may exploit artificially low-energy compressed configurations and generate unphysical structures.
             </p>
             <p>
-              This project investigates whether adding an explicit 1/r^12 repulsive prior to MACE improves both short-range reliability and downstream adjoint sampling on LJ13. We train vanilla and repulsion-augmented MACE models, evaluate their short-range energy and force behavior, and compare adjoint sampling under the learned potentials against sampling under the true analytic LJ energy. Additional diagnostics on MACE-OMol and FairChem models suggest that close-range reliability is a broader evaluation challenge for MLIPs.
+              This project investigates whether adding an explicit <R12Term /> repulsive prior to MACE improves both short-range reliability and downstream adjoint sampling on LJ13. We train vanilla and repulsion-augmented MACE models, evaluate their short-range energy and force behavior, and compare adjoint sampling under the learned potentials against sampling under the true analytic LJ energy. Additional diagnostics on MACE-OMol and FairChem models suggest that close-range reliability is a broader evaluation challenge for MLIPs.
             </p>
           </div>
         </Section>
@@ -281,7 +294,7 @@ export default function MLIPProjectPage() {
               Short-range reliability is evaluated using controlled energy and force dissociation scans on the OMol25 dataset that compress interatomic distances from 0.7 Å to 0.2 Å and test whether each model exhibits the physically expected response: energy should increase under compression, and forces should remain repulsive.
             </p>
             <p>
-              Applied across pretrained MLIPs, including MACE-OMol and FairChem models, it is shown that short-range repulsion failures are widespread rather than specific to a single architecture. To address this failure mode, MACE is augmented with an explicit 1/r^12 repulsive prior, which introduces a physically motivated inductive bias in the region of the energy landscape associated with close atomic contacts while preserving the flexibility of MACE’s learned many-body representation at longer distances.
+              Applied across pretrained MLIPs, including MACE-OMol and FairChem models, it is shown that short-range repulsion failures are widespread rather than specific to a single architecture. To address this failure mode, MACE is augmented with an explicit <R12Term /> repulsive prior, which introduces a physically motivated inductive bias in the region of the energy landscape associated with close atomic contacts while preserving the flexibility of MACE’s learned many-body representation at longer distances.
             </p>
             <p>The augmented energy can be written as</p>
 
@@ -314,7 +327,13 @@ export default function MLIPProjectPage() {
           </div>
 
           <div className="mt-8">
-            <FigureBlock caption="Short-range compression comparing vanilla MACE and 1/r^12-augmented MACE for two atoms compressed from 0.7 Å to 0.2 Å.">
+            <FigureBlock
+              caption={
+                <>
+                  Short-range compression comparing vanilla MACE and <R12Term />-augmented MACE for two atoms compressed from 0.7 Å to 0.2 Å.
+                </>
+              }
+            >
               <div className="flex justify-center">
                 <div className="grid w-fit max-w-full grid-cols-1 items-start gap-4 sm:grid-cols-2 sm:gap-6">
                   <img
@@ -346,7 +365,7 @@ export default function MLIPProjectPage() {
               Adjoint sampling serves as the primary downstream evaluation of whether these local short-range differences affect generative behavior. Sampling under the true analytic Lennard-Jones (LJ) potential establishes a reference distribution for physically meaningful generation on LJ13 energy. The same sampling procedure is then applied using learned MACE energy functions to assess how each model behaves when used as a generative energy landscape.
             </p>
             <p>
-              This evaluation shows that the short-range weaknesses observed in vanilla MACE translate into downstream sampling failures as generated structures contain unphysically short interatomic distances and correspondingly high true LJ energies. In contrast, the 1/r^12 augmented MACE model produces more physically consistent samples, with pair-distance and energy distributions that align more closely with the analytic LJ reference.
+              This evaluation shows that the short-range weaknesses observed in vanilla MACE translate into downstream sampling failures as generated structures contain unphysically short interatomic distances and correspondingly high true LJ energies. In contrast, the <R12Term />-augmented MACE model produces more physically consistent samples, with pair-distance and energy distributions that align more closely with the reference distribution (long Langevin dynamics simulation with the true LJ potential).
             </p>
           </div>
 
@@ -360,7 +379,11 @@ export default function MLIPProjectPage() {
 
           <div className="mt-8">
             <FigureBlock
-              caption="Pair-distance and energy behavior with 1/r^12-augmented MACE."
+              caption={
+                <>
+                  Pair-distance and energy distributions of adjoint sampling with vanilla MACE (left) and <R12Term />-augmented MACE (right) on LJ13. Sampling against vanilla MACE samples unphysically short interatomic distances (top left), for which MACE predicts low energies (bottom left, orange), but which have extremely high true LJ energies (bottom left, blue). Sampling against the repulsion-augmented MACE model produces more physically consistent structures that match the correct modes of the reference distribution (top right).
+                </>
+              }
             >
               <HistogramFigures />
             </FigureBlock>
@@ -375,7 +398,9 @@ export default function MLIPProjectPage() {
               More broadly, these results show that MLIP evaluation should include targeted short-range repulsion diagnostics, since standard energy and force metrics may not reveal failures in compressed regions of configuration space that become apparent only when a learned potential is used as a generative energy landscape. Repulsion diagnostics on MACE-OMol and FairChem models further suggest that close-range reliability is a general evaluation concern for learned interatomic potentials.
             </p>
             <p>
-              Questions, comments, or ideas building on this work? Please reach out at sophia.geng (at) mail.utoronto.ca or me (at) andreas-burger.com.
+              <span className="block">Questions, comments, or ideas? Please reach out!</span>
+              <span className="block">sophia.geng (at) mail.utoronto.ca</span>
+              <span className="block">me (at) andreas-burger.com</span>
             </p>
           </div>
         </Section>
