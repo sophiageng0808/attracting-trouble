@@ -387,7 +387,7 @@ function HistogramFigures() {
           Pair-distance histogram
         </div>
         <img
-          src="/images/pair_distance_histograms_by_type.png"
+          src={`${import.meta.env.BASE_URL}assets/pair_distance_histograms_by_type.png`}
           alt="Pair-distance histograms comparing vanilla MACE and 1/r^12-augmented MACE against the reference"
           className="block w-full"
         />
@@ -397,7 +397,7 @@ function HistogramFigures() {
           Energy histogram
         </div>
         <img
-          src="/images/energy_histograms_by_type.png"
+          src={`${import.meta.env.BASE_URL}assets/energy_histograms_by_type.png`}
           alt="Energy histograms comparing vanilla MACE and 1/r^12-augmented MACE against the reference and true LJ"
           className="block w-full"
         />
@@ -597,12 +597,12 @@ export default function MLIPProjectPage() {
               <div className="flex justify-center">
                 <div className="grid w-fit max-w-full grid-cols-1 items-start gap-4 sm:grid-cols-2 sm:gap-6">
                   <img
-                    src="/gifs/proper_xyz_animate_trajectory.gif"
+                    src={`${import.meta.env.BASE_URL}assets/proper_xyz_animate_trajectory.gif`}
                     alt="Animated 3D molecular trajectory for the short-range compression scan"
                     className="mx-auto block h-[min(60vw,320px)] w-auto max-w-full object-contain sm:h-[360px]"
                   />
                   <img
-                    src="/gifs/final_compression_probe_two_model.gif"
+                    src={`${import.meta.env.BASE_URL}assets/final_compression_probe_two_model.gif`}
                     alt="Animated energy and radial force dissociation scans for vanilla MACE and 1/r^12-augmented MACE"
                     className="mx-auto block h-[min(60vw,320px)] w-auto max-w-full object-contain sm:h-[360px]"
                   />
