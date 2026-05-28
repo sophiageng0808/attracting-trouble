@@ -18,8 +18,6 @@ type DiagnosticResultRow = {
   suite: string;
   model: string;
   modelUrl?: string;
-  sweeps: string;
-  calcSuccess: string;
   energyMonotonic: string;
   pairForceMonotonic: string;
   positiveForceAtMinDistance: string;
@@ -43,10 +41,10 @@ const accent = {
   coral: "#ec8e5a",
 };
 
-const takeawayBullets: string[] = [
-  "reduces unphysical close-contact structures",
-  "better reproduces the true Lennard-Jones pair-distance distribution",
-  "more closely matches the reference energy-shape behavior",
+const conclusionBullets: string[] = [
+  "Sampler training explores atom–atom distances far outside MLIP training distributions",
+  "Leading MLIPs can be attractive, not repulsive, at those distances, and samplers amplify that failure",
+  "Targeted diagnostics can help design future MLIPs for generative sampling",
 ];
 
 const references: Reference[] = [
@@ -130,8 +128,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
     model: "MACE-OMol",
     modelUrl:
       "https://github.com/ACEsuit/mace-foundations/releases/download/mace_omol_0/MACE-omol-0-extra-large-1024.model",
-    sweeps: "17",
-    calcSuccess: "17 / 17 = 100.0%",
     energyMonotonic: "1 / 17 = 5.88%",
     pairForceMonotonic: "0 / 17 = 0.00%",
     positiveForceAtMinDistance: "6 / 17 = 35.29%",
@@ -141,8 +137,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
     model: "MACE-OMol",
     modelUrl:
       "https://github.com/ACEsuit/mace-foundations/releases/download/mace_omol_0/MACE-omol-0-extra-large-1024.model",
-    sweeps: "1000",
-    calcSuccess: "1000 / 1000 = 100.0%",
     energyMonotonic: "250 / 1000 = 25.0%",
     pairForceMonotonic: "688 / 1000 = 68.8%",
     positiveForceAtMinDistance: "907 / 1000 = 90.7%",
@@ -151,8 +145,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
     suite: "diatomic",
     model: "UMA-M-1P1",
     modelUrl: "https://huggingface.co/facebook/UMA/blob/main/checkpoints/uma-m-1p1.pt",
-    sweeps: "17",
-    calcSuccess: "17 / 17 = 100.0%",
     energyMonotonic: "0 / 17 = 0.00%",
     pairForceMonotonic: "0 / 17 = 0.00%",
     positiveForceAtMinDistance: "0 / 17 = 0.00%",
@@ -161,8 +153,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
     suite: "diatomic",
     model: "UMA-S-1P1",
     modelUrl: "https://huggingface.co/facebook/UMA/blob/main/checkpoints/uma-s-1p1.pt",
-    sweeps: "17",
-    calcSuccess: "17 / 17 = 100.0%",
     energyMonotonic: "0 / 17 = 0.00%",
     pairForceMonotonic: "0 / 17 = 0.00%",
     positiveForceAtMinDistance: "1 / 17 = 5.88%",
@@ -171,8 +161,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
     suite: "diatomic",
     model: "UMA-S-1P2",
     modelUrl: "https://huggingface.co/facebook/UMA",
-    sweeps: "17",
-    calcSuccess: "17 / 17 = 100.0%",
     energyMonotonic: "0 / 17 = 0.00%",
     pairForceMonotonic: "0 / 17 = 0.00%",
     positiveForceAtMinDistance: "0 / 17 = 0.00%",
@@ -181,8 +169,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
     suite: "in-molecule",
     model: "UMA-M-1P1",
     modelUrl: "https://huggingface.co/facebook/UMA/blob/main/checkpoints/uma-m-1p1.pt",
-    sweeps: "1000",
-    calcSuccess: "1000 / 1000 = 100.0%",
     energyMonotonic: "0 / 1000 = 0.00%",
     pairForceMonotonic: "0 / 1000 = 0.00%",
     positiveForceAtMinDistance: "4 / 1000 = 0.40%",
@@ -191,8 +177,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
     suite: "in-molecule",
     model: "UMA-S-1P1",
     modelUrl: "https://huggingface.co/facebook/UMA/blob/main/checkpoints/uma-s-1p1.pt",
-    sweeps: "1000",
-    calcSuccess: "1000 / 1000 = 100.0%",
     energyMonotonic: "0 / 1000 = 0.00%",
     pairForceMonotonic: "0 / 1000 = 0.00%",
     positiveForceAtMinDistance: "21 / 1000 = 2.10%",
@@ -201,8 +185,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
     suite: "in-molecule",
     model: "UMA-S-1P2",
     modelUrl: "https://huggingface.co/facebook/UMA",
-    sweeps: "1000",
-    calcSuccess: "1000 / 1000 = 100.0%",
     energyMonotonic: "0 / 1000 = 0.00%",
     pairForceMonotonic: "0 / 1000 = 0.00%",
     positiveForceAtMinDistance: "166 / 1000 = 16.60%",
@@ -210,8 +192,6 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
   {
     suite: "diatomic",
     model: "GFN2-xTB",
-    sweeps: "17",
-    calcSuccess: "17 / 17 = 100.0%",
     energyMonotonic: "17 / 17 = 100.0%",
     pairForceMonotonic: "17 / 17 = 100.0%",
     positiveForceAtMinDistance: "17 / 17 = 100.0%",
@@ -219,11 +199,9 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
   {
     suite: "in-molecule",
     model: "GFN2-xTB",
-    sweeps: "1000",
-    calcSuccess: "946 / 1000 = 94.6%",
-    energyMonotonic: "946 / 1000 = 94.6%",
-    pairForceMonotonic: "946 / 1000 = 94.6%",
-    positiveForceAtMinDistance: "946 / 1000 = 94.6%",
+    energyMonotonic: "946 / 1000 = 94.6% (not converged)",
+    pairForceMonotonic: "946 / 1000 = 94.6% (not converged)",
+    positiveForceAtMinDistance: "946 / 1000 = 94.6% (not converged)",
   },
 ];
 
@@ -347,10 +325,8 @@ function DiagnosticResultsTable() {
       <table className="min-w-full border-collapse text-left text-xs">
         <thead>
           <tr style={{ backgroundColor: `${accent.mint}40` }}>
-            <th className="whitespace-nowrap px-4 py-3 font-semibold text-slate-900">Suite</th>
+            <th className="whitespace-nowrap px-4 py-3 font-semibold text-slate-900">System</th>
             <th className="whitespace-nowrap px-4 py-3 font-semibold text-slate-900">Model / method</th>
-            <th className="whitespace-nowrap px-4 py-3 font-semibold text-slate-900">Sweeps</th>
-            <th className="whitespace-nowrap px-4 py-3 font-semibold text-slate-900">Calc success</th>
             <th className="whitespace-nowrap px-4 py-3 font-semibold text-slate-900">Energy monotonic</th>
             <th className="whitespace-nowrap px-4 py-3 font-semibold text-slate-900">Pair-force monotonic</th>
             <th className="whitespace-nowrap px-4 py-3 font-semibold text-slate-900">
@@ -382,12 +358,6 @@ function DiagnosticResultsTable() {
                 )}
               </td>
               <td className="whitespace-nowrap border-t border-slate-200 px-4 py-3 text-slate-600">
-                {row.sweeps}
-              </td>
-              <td className="whitespace-nowrap border-t border-slate-200 px-4 py-3 text-slate-600">
-                {row.calcSuccess}
-              </td>
-              <td className="whitespace-nowrap border-t border-slate-200 px-4 py-3 text-slate-600">
                 {row.energyMonotonic}
               </td>
               <td className="whitespace-nowrap border-t border-slate-200 px-4 py-3 text-slate-600">
@@ -400,53 +370,6 @@ function DiagnosticResultsTable() {
           ))}
         </tbody>
       </table>
-    </div>
-  );
-}
-
-const asbsPanels = [
-  {
-    title: "Vanilla MACE",
-    src: "/gifs/adjoint_generation_vanilla_evolve.gif",
-    alt: "ASBS under vanilla MACE energy collapsing",
-    color: accent.coral,
-  },
-  {
-    title: (
-      <>
-        <R12Term />-augmented MACE
-      </>
-    ),
-    src: "/gifs/adjoint_generation_r12_evolve.gif",
-    alt: "ASBS under 1/r^12-augmented MACE energy",
-    color: accent.gold,
-  },
-] as const;
-
-function ASBSComparison() {
-  return (
-    <div className="space-y-2">
-      <div className="grid gap-x-4 md:grid-cols-2">
-        {asbsPanels.map((panel) => (
-          <div
-            key={`${panel.src}-label`}
-            className="min-h-[2.75rem] text-xs font-semibold uppercase tracking-[0.15em]"
-            style={{ color: panel.color }}
-          >
-            {panel.title}
-          </div>
-        ))}
-      </div>
-      <div className="grid gap-x-4 md:grid-cols-2">
-        {asbsPanels.map((panel) => (
-          <img
-            key={`${panel.title}-gif`}
-            src={panel.src}
-            alt={panel.alt}
-            className="block h-auto w-full object-contain"
-          />
-        ))}
-      </div>
     </div>
   );
 }
@@ -491,7 +414,7 @@ export default function MLIPProjectPage() {
             <a href="#repulsion-diagnostic" className="hover:text-slate-900">Repulsion diagnostic</a>
             <a href="#repulsion-fix" className="hover:text-slate-900">Repulsion fix</a>
             <a href="#asbs" className="hover:text-slate-900">ASBS</a>
-            <a href="#main-takeaway" className="hover:text-slate-900">Main Takeaway</a>
+            <a href="#conclusions" className="hover:text-slate-900">Conclusions</a>
             <a href="#references" className="hover:text-slate-900">References</a>
           </nav>
         </div>
@@ -501,20 +424,17 @@ export default function MLIPProjectPage() {
         <section className="bg-white">
           <div className="mx-auto max-w-5xl px-6 py-16 md:py-20">
             <div className="text-center">
-              <div className="text-xs uppercase tracking-[0.24em] text-slate-500">
-                University of Toronto
-              </div>
-              <h1 className="mx-auto mt-4 max-w-4xl font-serif text-5xl font-semibold tracking-tight text-slate-900 md:text-6xl">
+              <h1 className="mx-auto max-w-4xl font-serif text-5xl font-semibold tracking-tight text-slate-900 md:text-6xl">
                 Attracting Trouble?
               </h1>
               <p className="mx-auto mt-5 max-w-3xl text-xl leading-8 text-slate-700 md:text-2xl">
-                How MLIPs fail in diffusion-based sampling
+                How MLIPs fail for diffusion-based sampling
               </p>
               <div className="mt-6 text-base text-slate-700">
-                Sophia Geng<sup>1</sup>, Andreas Burger<sup>1,2,3</sup>, Varinia Bernales<sup>1</sup>, Alán Aspuru-Guzik<sup>1,2,3</sup>
+                Sophia Geng<sup>1</sup>, Andreas Burger<sup>1,2,3</sup>, Varinia Bernales<sup>1,4</sup>, Alán Aspuru-Guzik<sup>1,2,3,4</sup>
               </div>
               <div className="mx-auto mt-2 max-w-3xl text-sm leading-6 text-slate-500">
-                <sup>1</sup> University of Toronto · <sup>2</sup> Vector Institute · <sup>3</sup> NVIDIA
+                <sup>1</sup> University of Toronto · <sup>2</sup> Vector Institute · <sup>3</sup> NVIDIA · <sup>4</sup> Acceleration Consortium
               </div>
               <p className="mx-auto mt-4 max-w-3xl text-sm leading-7 text-slate-600">
                 Diffusion-based samplers trained on MLIPs can generate unphysical structures with clashing atoms.
@@ -589,16 +509,16 @@ export default function MLIPProjectPage() {
 
             <p>
               For example, the usual equilibrium bond distance of two atoms is <InlineMath>0.75-1.55 Å</InlineMath>. The smallest distance between any two atoms in the 4Mio split of the OMol25 dataset is{" "}
-              <InlineMath>0.6 Å</InlineMath>. Meanwhile, untrained diffusion-based samplers routinely generate geometries with atoms unrealistically close to each other <InlineMath>&lt;&lt; 0.1 Å</InlineMath>. This creates a distribution shift between the structures used to train MLIPs and the structures encountered during sampler training.
+              <InlineMath>0.4 Å</InlineMath>. Meanwhile, untrained diffusion-based samplers routinely generate geometries with atoms unrealistically close to each other <InlineMath>&lt;&lt; 0.1 Å</InlineMath>. This creates a distribution shift between the structures used to train MLIPs and the structures encountered during sampler training.
             </p>
 
             <p id="neural-samplers-note" className="border-t border-slate-200 pt-3 text-sm leading-6 text-slate-500">
-              <sup>1</sup> Diffusion-based samplers are part of a broader class sometimes called neural samplers, which can also include normalizing-flow-based models.
+              <sup>1</sup> Diffusion-based samplers are also called neural samplers, which can include normalizing flows.
             </p>
           </div>
         </Section>
 
-        <Section id="repulsion-diagnostic" title="Diagnosing short-range repulsion failures">
+        <Section id="repulsion-diagnostic" title="Diagnosing the problem: lack of repulsion at close ranges">
           <div className="space-y-4 text-[15px] leading-7 text-slate-600">
             <p>
               To test whether MLIPs behave physically at very short distances, we distort real OMol molecular geometries and scan a selected pair separation from <InlineMath>0.30 Å</InlineMath> down to <InlineMath>0.03 Å</InlineMath> on a 30-point distance grid. For each sampled structure, we choose an atom <InlineMath>i</InlineMath>, identify its nearest neighbor <InlineMath>j</InlineMath>, and replace their separation while holding the pair midpoint and direction fixed.
@@ -668,7 +588,7 @@ export default function MLIPProjectPage() {
           </div>
         </Section>
 
-        <Section id="repulsion-fix" title="A simple 1/r^12 repulsion fix">
+        <Section id="repulsion-fix" title="A simple fix: adding a repulsion prior">
           <div className="space-y-4 text-[15px] leading-7 text-slate-600">
             <p>
               To address this failure mode, MACE is augmented with an explicit <R12Term /> repulsive prior, which introduces a physically motivated inductive bias in the region of the energy landscape associated with close atomic contacts while preserving the flexibility of MACE’s learned many-body representation at longer distances.
@@ -717,14 +637,6 @@ export default function MLIPProjectPage() {
 
           <div className="mt-8">
             <FigureBlock
-              caption="ASBS under learned MACE energy landscapes."
-            >
-              <ASBSComparison />
-            </FigureBlock>
-          </div>
-
-          <div className="mt-8">
-            <FigureBlock
               caption={
                 <>
                   Pair-distance and energy distributions from ASBS with vanilla MACE (left) and <R12Term />-augmented MACE (right) on LJ13. Sampling against vanilla MACE samples unphysically short interatomic distances (top left), for which MACE predicts low energies (bottom left, orange), but which have extremely high true LJ energies (bottom left, blue). Sampling against the repulsion-augmented MACE model produces more physically consistent structures that match the correct modes of the reference distribution (top right).
@@ -736,18 +648,16 @@ export default function MLIPProjectPage() {
           </div>
         </Section>
 
-        <Section id="main-takeaway" title="Main Takeaway" light={true}>
+        <Section id="conclusions" title="Conclusions" light={true}>
           <div className="space-y-4 text-[15px] leading-7 text-slate-600">
-            <p>Compared with vanilla MACE, the repulsion-augmented model:</p>
-            <BulletList items={takeawayBullets} />
             <p>
-              More broadly, these results show that MLIP evaluation should include targeted short-range repulsion diagnostics, since standard energy and force metrics may not reveal failures in compressed regions of configuration space that become apparent only when a learned potential is used as a generative energy landscape. Repulsion diagnostics on MACE-OMol and FairChem models further suggest that close-range reliability is a general evaluation concern for learned interatomic potentials.
-              <Citation ids={["chiang2026mlip", "liu2026evaluation"]} />
+              Diffusion-based samplers trained on MLIPs can fail for a reason that is easy to miss on equilibrium benchmarks: the geometries encountered during sampler training are not the geometries used to fit the potential. Our OMol compression scans and LJ13 ASBS experiments point to three conclusions:
             </p>
+            <BulletList items={conclusionBullets} />
             <p>
               <span className="block">Questions, comments, or ideas? Please reach out!</span>
-              <span className="block">sophia.geng (at) mail.utoronto.ca</span>
-              <span className="block">me (at) andreas-burger.com</span>
+              <span className="block"> sophia.geng (at) mail.utoronto.ca</span>
+              <span className="block"> me (at) andreas-burger.com</span>
             </p>
           </div>
         </Section>
@@ -758,7 +668,7 @@ export default function MLIPProjectPage() {
           </p>
           <pre className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white p-5 text-left text-xs leading-6 text-slate-700">
 {`@misc{geng2026attractingtrouble,
-  title = {Attracting Trouble? How Generative Modelling Fails with MLIPs},
+  title = {Attracting Trouble? How MLIPs fail for diffusion-based sampling},
   author = {Geng, Sophia and Burger, Andreas and Bernales, Varinia and Aspuru-Guzik, Alán},
   year = {2026},
   url = {https://sophiageng0808.github.io/attracting-trouble/}
