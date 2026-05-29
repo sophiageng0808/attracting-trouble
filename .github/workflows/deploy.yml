@@ -10,6 +10,9 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -24,6 +27,7 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: attracting-trouble/package-lock.json
+      - uses: actions/configure-pages@v5
       - run: npm ci
         working-directory: attracting-trouble
       - run: npm run build

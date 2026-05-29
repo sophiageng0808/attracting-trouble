@@ -121,6 +121,11 @@ const references: Reference[] = [
     url: "https://openreview.net/forum?id=i5QhkUCzJh",
   },
   {
+    id: "burger2026molelambda",
+    title: "MōLe-Λ: Learning the Coupled-Cluster Response State for Energies, Gradients, and Properties",
+    url: "https://arxiv.org/abs/2605.29622",
+  },
+  {
     id: "burger2025hip",
     title: "Shoot from the HIP: Hessian Interatomic Potentials without derivatives",
     url: "https://arxiv.org/abs/2509.21624",
@@ -204,9 +209,9 @@ const diagnosticResultRows: DiagnosticResultRow[] = [
   {
     suite: "in-molecule",
     model: "GFN2-xTB",
-    energyMonotonic: "946 / 1000 = 94.6% (not converged)",
-    pairForceMonotonic: "946 / 1000 = 94.6% (not converged)",
-    positiveForceAtMinDistance: "946 / 1000 = 94.6% (not converged)",
+    energyMonotonic: "946 / 1000 = 94.6%",
+    pairForceMonotonic: "946 / 1000 = 94.6%",
+    positiveForceAtMinDistance: "946 / 1000 = 94.6%",
   },
 ];
 
@@ -678,7 +683,7 @@ export default function MLIPProjectPage() {
                   We first observed this problem when training a diffusion-based sampler using our Hessian Interatomic Potential (HIP) model <Citation ids={["burger2025hip"]} />. It would also be interesting to extend the approach for higher-order derivatives, such as Hessians.
                 </p>
                 <p>
-                  A recent paper from our group, MōLe <Citation ids={["thiede2026mole"]} />, showed that predicting the underlying coupled-cluster wavefunction leads to highly accurate models that extrapolates robustly to stretched and compressed geometries.
+                  Recent papers from our group, MōLe <Citation ids={["thiede2026mole", "burger2026molelambda"]} />, showed that predicting the underlying coupled-cluster wavefunction leads to highly accurate models that extrapolate robustly to stretched and compressed geometries.
                 </p>
               </div>
             </div>
